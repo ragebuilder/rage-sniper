@@ -1,17 +1,11 @@
-app = "rage-sniper-k7asug-bitter-forest-1507.fly.dev"
-primary_region = "jnb"
-
-[build]
-  image = "python:3.10-slim"
+app = "rage-sniper-k7asug-bitter-forest-1507"
 
 [env]
-  PORT = "8080"
+PORT = "8080"
 
 [[services]]
   internal_port = 8080
   protocol = "tcp"
-  auto_start = true
-  auto_stop = true
 
   [[services.ports]]
     handlers = ["http"]
