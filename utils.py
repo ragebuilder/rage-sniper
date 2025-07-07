@@ -1,17 +1,13 @@
-import requests
-
 def evaluate_tokens():
-    # Dummy token set
-    tokens = [
+    return [
         {
-            "name": "ExampleToken1",
+            "name": "ExampleToken",
             "address": "So11111111111111111111111111111111111111112",
-            "volume": 2000000,
-            "tx_1h": 123,
+            "volume": 250000,
+            "tx_1h": 150,
             "rugcheck_status": "GOOD",
             "fake_volume": False,
             "liquidity_locked": True,
-            "influencer_score": "pending"
+            "influencer_score": 87
         }
     ]
-    return tokens
