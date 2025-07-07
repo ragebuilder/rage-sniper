@@ -1,3 +1,2 @@
-fastapi
 requests
-uvicorn
+python-telegram-bot

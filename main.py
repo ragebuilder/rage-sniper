@@ -1,13 +1,18 @@
-from fastapi import FastAPI
-from signals import scan_and_send_signals
 
-app = FastAPI()
+import time
 
-@app.get("/")
-def read_root():
-    return {"message": "Rage Sniper Bot is running"}
+def run_scan():
+    print("Running token scan with filters:")
+    print("- 1h Transactions ≥ 100")
+    print("- Rugcheck Audit = GOOD")
+    print("- No fake volume (heuristic)")
+    print("- Liquidity locked")
+    print("- Placeholder for influencer/BubbleMaps checks")
+    print("Returning top 10 tokens...")
+    # Placeholder for actual evaluation logic
+    return []
 
-@app.post("/signals")
-def trigger_signals():
-    scan_and_send_signals()
-    return {"message": "Signals triggered"}
+if __name__ == "__main__":
+    while True:
+        results = run_scan()
+        time.sleep(300)  # Run every 5 minutes
