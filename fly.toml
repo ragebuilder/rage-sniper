@@ -1,26 +1,22 @@
 app = "rage-sniper-k7asug"
-
-kill_signal = "SIGINT"
-kill_timeout = 5
-processes = []
+primary_region = "jnb"
 
 [build]
-  dockerfile = "Dockerfile"
+  image = "python:3.10-slim"
 
 [env]
   PORT = "8080"
 
-[http_service]
+[[services]]
   internal_port = 8080
-  force_https = true
-  auto_stop_machines = true
-  auto_start_machines = true
-  min_machines_running = 1
+  protocol = "tcp"
+  auto_start = true
+  auto_stop = true
 
-  [[http_service.ports]]
+  [[services.ports]]
     handlers = ["http"]
     port = 80
 
-  [[http_service.ports]]
+  [[services.ports]]
     handlers = ["tls", "http"]
     port = 443
