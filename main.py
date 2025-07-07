@@ -1,6 +1,8 @@
 import os
 from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
+from dotenv import load_dotenv
+load_dotenv()
 
 BOT_PIN = os.getenv("BOT_PIN", "1739")
 
