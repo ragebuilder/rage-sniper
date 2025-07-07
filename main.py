@@ -11,6 +11,10 @@ if __name__ == '__main__':
     try:
         print("🔍 TELEGRAM_BOT_TOKEN:", os.getenv("TELEGRAM_BOT_TOKEN"))
         print("🔍 BOT_PIN:", BOT_PIN)
+import uvicorn
+
+if __name__ == '__main__':
+    uvicorn.run("main:app", host="0.0.0.0", port=8080, reload=False)
 
         app = ApplicationBuilder().token(os.getenv("TELEGRAM_BOT_TOKEN")).build()
         app.add_handler(CommandHandler("start", start))
