@@ -1,18 +1,34 @@
+from flask import Flask, request
+from utils import evaluate_tokens
+import csv
+import os
 
-import time
+app = Flask(__name__)
 
-def run_scan():
-    print("Running token scan with filters:")
-    print("- 1h Transactions ≥ 100")
-    print("- Rugcheck Audit = GOOD")
-    print("- No fake volume (heuristic)")
-    print("- Liquidity locked")
-    print("- Placeholder for influencer/BubbleMaps checks")
-    print("Returning top 10 tokens...")
-    # Placeholder for actual evaluation logic
-    return []
+@app.route("/")
+def home():
+    return "Rage Sniper Bot is running"
+
+@app.route("/signals", methods=["POST", "GET"])
+def signals():
+    tokens = evaluate_tokens()
+    output = []
+    for token in tokens:
+        output.append({
+            "name": token['name'],
+            "address": token['address'],
+            "volume": token['volume'],
+            "tx_1h": token['tx_1h'],
+            "rugcheck": token['rugcheck_status'],
+            "fake_volume": token['fake_volume'],
+            "liquidity_locked": token['liquidity_locked'],
+            "influencer_score": token.get('influencer_score', 'pending')
+        })
+    with open("/mnt/data/signal_results.csv", "w", newline="") as f:
+        writer = csv.DictWriter(f, fieldnames=output[0].keys())
+        writer.writeheader()
+        writer.writerows(output)
+    return {"tokens": output}, 200
 
 if __name__ == "__main__":
-    while True:
-        results = run_scan()
-        time.sleep(300)  # Run every 5 minutes
+    app.run(host="0.0.0.0", port=8080)
