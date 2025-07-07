@@ -7,9 +7,6 @@
 [[services]]
   internal_port = 8080
   protocol = "tcp"
-  auto_start = true
-  auto_stop = true
-  processes = ["app"]
 
   [[services.ports]]
     port = 8080
