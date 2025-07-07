@@ -1,6 +1,18 @@
 import os
-from telegram import Update
-from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
+from telegram.ext import Updater, CommandHandler
+
+BOT_TOKEN = os.environ.get("TELEGRAM_API_TOKEN")
+
+def start(update, context):
+    update.message.reply_text("Hello! Bot is working ✅")
+
+updater = Updater(BOT_TOKEN, use_context=True)
+dp = updater.dispatcher
+dp.add_handler(CommandHandler("start", start))
+
+updater.start_polling()
+updater.idle()
+
 
 BOT_PIN = os.getenv("BOT_PIN", "1739")
 
