@@ -1,26 +1,11 @@
-app = "rage-sniper-k7asug"
+# Dockerfile for rage-sniper
+FROM python:3.10-slim
 
-kill_signal = "SIGINT"
-kill_timeout = 5
-processes = []
+WORKDIR /app
 
-[build]
-  dockerfile = "Dockerfile"
+COPY requirements.txt .
+RUN pip install --upgrade pip && pip install -r requirements.txt
 
-[env]
-  PORT = "8080"
+COPY . .
 
-[http_service]
-  internal_port = 8080
-  force_https = true
-  auto_stop_machines = true
-  auto_start_machines = true
-  min_machines_running = 1
-
-  [[http_service.ports]]
-    handlers = ["http"]
-    port = 80
-
-  [[http_service.ports]]
-    handlers = ["tls", "http"]
-    port = 443
+CMD ["python", "main.py"]
